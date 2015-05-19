@@ -56,6 +56,22 @@ var gameOver = function(winner) {
     Settings.upsert({name: 'isGameOver'}, {$set: {name: 'isGameOver', value:true}});
     Settings.upsert({name: 'gameOverDate'}, {$set: {name: 'gameOverDate', value:new Date()}});
 
+    // update everyone's profile with their rank
+    Meteor.users.find({}, {fields: {emails:1}}).forEach(function(user) {
+
+        var ds = Dailystats.findOne({user_id:user._id}, {fields: {incomeRank:1, vassalRank:1}, sort:{created_at:-1}});
+        if (ds) {
+
+            // update profile
+            var options = {
+                rankByIncome: ds.incomeRank,
+                rankByVassals: ds.vassalRank
+            };
+            callLandingMethod('profile_setRankByIncome', user.emails[0].address, options);
+            callLandingMethod('profile_setRankByVassals', user.emails[0].address, options);
+        }
+    });
+
     // go ahead and set game reset date and game start date here
     // so that we can override them manually in the admin panel if we want
 

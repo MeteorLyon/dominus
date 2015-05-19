@@ -1,26 +1,31 @@
 <template name="rp_info_army">
 	<div class="rp_content" id="rp_info_army">
+		{{> rp_closeButton}}
+
 		{{#if infoLoaded}}
 			<div class="panel panel-default" style="margin-top:0;">
 				<div class="panel-body">
-					<h4>
-						<span class="light_text">Army</span> {{name}}
-						&nbsp;
+					<div class="rpNameContainer">
+						<div class="rpNameType">Army</div>
+						<div class="rpName">{{name}}</div>
 						{{#if is_owner}}
-							{{> edit_name_button}}
+							<div class="rpEditName">{{> edit_name_button}}</div>
 						{{/if}}
-					</h4>
+						<div style="clear:both;"></div>
+						{{#unless is_owner}}
+							<div style="margin-top:8px;">
+								<div style="float:left;">
+									<span class="light_text">Lord</span>
+									{{username}}
+								</div>
 
-					{{#unless is_owner}}
-						<span class="light_text">Lord</span> {{username}}
-						&nbsp;&nbsp;
-						{{> center_on_button x=castle_x y=castle_y selected_type='castle' selected_id=castle_id}}
-						<br>
-					{{/unless}}
-
-					{{> hex_location}}
-					&nbsp;&nbsp;
-					{{> center_on_button x=x y=y selected_type='army' selected_id=_id}}
+								<div style="float:right;">
+									{{> center_on_button x=castle_x y=castle_y selected_type='castle' selected_id=castle_id}}
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+						{{/unless}}
+					</div>
 				</div>
 			</div>
 

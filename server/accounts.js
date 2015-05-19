@@ -113,7 +113,7 @@ Accounts.onLogin(function(data) {
 
 onCreateUser = function(userId) {
 	check(userId, String);
-	var fields = {emails:1, username:1, castle_id:1};
+	var fields = {emails:1, username:1, castle_id:1, admin:1};
 	var user = Meteor.users.findOne(userId, {fields:fields});
 	if (user && !user.castle_id) {
 		Cue.addTask('subscribeToNewsletter', {isAsync:true, unique:true}, {email:user.emails[0].address, name:user.username});
@@ -123,7 +123,7 @@ onCreateUser = function(userId) {
 		Cue.addTask('setupEveryoneChatroom', {isAsync:false, unique:true}, {});
 
 		// create profile
-		var options = {username: user.username};
+		var options = {username: user.username, admin:user.admin};
 		callLandingMethod('profile_newPlayer', user.emails[0].address, options);
 
 		// let home base know that a new player has joined

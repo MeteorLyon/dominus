@@ -23,7 +23,7 @@ receive_income = function(user, numGold, numGrain, numLumber, numOre, numWool, n
 	check(numWool, validNumber)
 	check(numClay, validNumber)
 
-	// get array of lord, lord's lord, his lord etc
+	// get array of lord, lord's lord, their lord etc
 	//var peopleAbove = getPeopleAbove(user._id)
 	var numAbove = user.allies_above.length
 
@@ -68,7 +68,7 @@ receive_income = function(user, numGold, numGrain, numLumber, numOre, numWool, n
 }
 
 
-// // get array of lord, lord's lord, his lord etc
+// // get array of lord, lord's lord, their lord etc
 // getPeopleAbove = function(user_id) {
 // 	arr = _getPeopleAbove(user_id, [])
 // 	return arr

@@ -25,6 +25,8 @@ Template.navigation_panel.events({
 		var x = Number($(template.find('#move_grid_x')).val())
 		var y = Number($(template.find('#move_grid_y')).val())
 
+		check(x, validNumber);
+		check(y, validNumber);
 		if (!isNaN(x) && !isNaN(y)) {
 			Meteor.call('coords_to_id', x, y, 'hex', function(error, hexId) {
 				if (!error && hexId) {

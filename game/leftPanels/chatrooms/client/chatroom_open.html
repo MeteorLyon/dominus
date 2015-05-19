@@ -84,12 +84,20 @@
 			<tbody>
 				<tr>
 					<td style="padding-left:15px;padding-right:15px;padding-top:12px;vertical-align:top;">
-						<div class="input-group" style="width:100%;">
-							<input type="text" class="form-control chatInput">
-							<span class="input-group-btn">
-								<button class="btn btn-primary sendChatButton" type="button">Send</button>
-							</span>
-						</div>
+
+						{{#if hasReports}}
+							<div>
+								Can't post in chatrooms for {{reportTimeLeft}}.
+							</div>
+						{{else}}
+							<div class="input-group" style="width:100%;">
+								<input type="text" class="form-control chatInput">
+								<span class="input-group-btn">
+									<button class="btn btn-primary sendChatButton" type="button">Send</button>
+								</span>
+							</div>
+						{{/if}}
+
 						<br>
 
 						{{#each roomChats}}

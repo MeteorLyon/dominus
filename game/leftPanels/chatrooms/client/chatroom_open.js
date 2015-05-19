@@ -1,4 +1,25 @@
 Template.chatroom_open.helpers({
+	hasReports: function() {
+		var num = Reports.find().count();
+		if (num && num > 0) {
+			return true;
+		}
+	},
+
+	reportTimeLeft: function() {
+		var fields = {createdAt:1};
+		var sort = {createdAt:1};
+		var oldest = Reports.findOne({}, {sort:sort, fields:fields});
+		var numReports = Reports.find().count();
+		if (oldest) {
+			var reportDate = moment(oldest.createdAt);
+			var pastTime = moment() - reportDate;
+			var length = reportDuration(numReports);
+			var timeLeft = length - pastTime;
+			return moment.duration(timeLeft).humanize();
+		}
+	},
+
 	chatroomChatsReady: function() {
 		return Template.instance().chatroomChatsReady.get()
 	},
@@ -261,6 +282,12 @@ Template.chatroom_open.events({
 		event.preventDefault()
 		event.stopPropagation()
 
+		// can't chat if you have reports
+		var numReports = Reports.find().count();
+		if (numReports && numReports > 0) {
+			return false;
+		}
+
 		var input = template.find('.chatInput')
 
 		var message = _.clean($(input).val())
@@ -304,6 +331,8 @@ Template.chatroom_open.events({
 			y: parseInt(event.currentTarget.getAttribute('data-y'))
 		}
 
+		check(hex.x, validNumber);
+		check(hex.y, validNumber);
 		Meteor.call('coords_to_id', hex.x, hex.y, 'hex', function(error, hexId) {
 			if (!error && hexId) {
 				center_on_hex(hex.x, hex.y);
@@ -319,6 +348,12 @@ Template.chatroom_open.events({
 		if (event.keyCode === 13) {
 			event.preventDefault()
 			event.stopPropagation()
+
+			// can't chat if you have reports
+			var numReports = Reports.find().count();
+			if (numReports && numReports > 0) {
+				return false;
+			}
 
 			var input = template.find('.chatInput')
 

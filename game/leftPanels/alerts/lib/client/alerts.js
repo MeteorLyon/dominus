@@ -38,8 +38,8 @@ alertSharedEvents = {
             x: parseInt(event.currentTarget.getAttribute('data-x')),
             y: parseInt(event.currentTarget.getAttribute('data-y'))
         }
-        check(hex.x, validNumber)
-        check(hex.y, validNumber)
+        check(hex.x, validNumber);
+        check(hex.y, validNumber);
 
         Meteor.call('coords_to_id', hex.x, hex.y, 'hex', function(error, hexId) {
             if (!error && hexId) {

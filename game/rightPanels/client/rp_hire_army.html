@@ -63,9 +63,9 @@
 					<thead>
 						<tr>
 							<td></td>
-							<td>Current</td>
-							<td>Cost</td>
-							<td>Final</td>
+							<td style="text-align:right;">Current</td>
+							<td style="text-align:right;">Cost</td>
+							<td style="text-align:right;">Final</td>
 							<td></td>
 						</tr>
 					</thead>
@@ -78,7 +78,7 @@
 								<td style="text-align:right;">{{final_cost this}}</td>
 								<td>
 									{{#unless is_gold this}}
-										<button type="button" class="btn btn-xs btn-primary btn-block sell_all_button" data-type="{{this}}">Sell All {{capitalize this}}</button>
+										<button type="button" class="btn btn-xs btn-primary btn-block sell_all_button" data-type="{{this}}">Sell All</button>
 									{{/unless}}
 								</td>
 							</tr>
@@ -98,11 +98,11 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>Footmen</th>
+							<th>Foot</th>
 							<th>Archer</th>
-							<th>Pikemen</th>
-							<th>Cavalry</th>
-							<th>Catapults</th>
+							<th>Pike</th>
+							<th>Cav</th>
+							<th>Cat</th>
 						</tr>
 					</thead>
 					<tbody>

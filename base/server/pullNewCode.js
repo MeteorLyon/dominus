@@ -19,7 +19,7 @@ Meteor.methods({
 });
 
 
-var pullNewCode = function() {
+pullNewCode = function() {
     var self = this;
     self.tries = 0;
     self.maxTries = 120;    // 60 minutes

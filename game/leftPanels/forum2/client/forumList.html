@@ -15,7 +15,8 @@
 
             <div style="float:left;">
                 <select class="form-control" id="forumTagSelect">
-                    <option value="all" {{isAllSelectedCategory}}>All</option>
+                    <option value="all" {{isAllSelectedCategory}}>All Dominus Forums</option>
+                    <option disabled></option>
                     {{#each tags}}
                         <option value="{{_id}}" {{isSelectedCategory}}>{{name}}</option>
                     {{/each}}
@@ -23,11 +24,14 @@
             </div>
 
             <div style="float:right;">
-                <button id="newTopicButton" class="btn btn-primary">New Topic</button>
                 <button id="markAllReadButton" class="btn btn-primary">Mark All Read</button>
             </div>
 
             <div style="clear:both;"></div>
+
+            <br>
+
+            <button id="newTopicButton" class="btn btn-primary btn-block">New Topic</button>
 
             <br>
         </div>

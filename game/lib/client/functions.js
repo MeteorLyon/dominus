@@ -95,8 +95,8 @@ remove_all_highlights = function() {
 
 
 deselect_all = function() {
-	Session.set('mouse_mode', 'default')
-	Session.set('selected_id', undefined)
-	Session.set('selected_type', undefined)
-	Session.set('rp_template', undefined)
-}
+	Session.set('mouse_mode', 'default');
+	Session.set('selected_id', undefined);
+	Session.set('selected_type', undefined);
+	Session.set('rp_template', undefined);
+};

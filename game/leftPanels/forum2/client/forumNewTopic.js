@@ -1,4 +1,25 @@
 Template.forumNewTopic.helpers({
+    hasReports: function() {
+        var num = Reports.find().count();
+        if (num && num > 0) {
+            return true;
+        }
+    },
+
+    reportTimeLeft: function() {
+        var fields = {createdAt:1};
+        var sort = {createdAt:1};
+        var oldest = Reports.findOne({}, {sort:sort, fields:fields});
+        var numReports = Reports.find().count();
+        if (oldest) {
+            var reportDate = moment(oldest.createdAt);
+            var pastTime = moment() - reportDate;
+            var length = reportDuration(numReports);
+            var timeLeft = length - pastTime;
+            return moment.duration(timeLeft).humanize();
+        }
+    },
+
     tags: function() {
         return Forumtags.find();
     }

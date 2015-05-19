@@ -3,6 +3,13 @@ Meteor.methods({
         var self = this;
         self.unblock();
 
+        // can't chat if you have reports
+        var find = {user_id:Meteor.userId(), active:true};
+        var numReports = Reports.find(find).count();
+        if (numReports && numReports > 0) {
+            throw new Meteor.Error('Cannot post in forums after you have been reported.');
+        }
+
         if (!tagId || tagId == 'false') {
             throw new Meteor.Error('Select a category.');
         }
@@ -86,6 +93,13 @@ Meteor.methods({
         var self = this;
         self.unblock();
 
+        // can't chat if you have reports
+        var find = {user_id:Meteor.userId(), active:true};
+        var numReports = Reports.find(find).count();
+        if (numReports && numReports > 0) {
+            throw new Meteor.Error('Cannot post in forums after you have been reported.');
+        }
+
         if (text.length < 1) {
             throw new Meteor.Error('Text too short.');
         }
@@ -146,6 +160,19 @@ Meteor.methods({
             var user = Meteor.users.findOne(Meteor.userId(), {fields:{emails:1}});
             if (user) {
                 landingConnection.call('forumMarkAllRead', process.env.DOMINUS_KEY, user.emails[0].address);
+            }
+        }
+    },
+
+
+    admin_moveTopicToTag: function(topicId, tagId) {
+        check(topicId, String);
+        check(tagId, String);
+
+        if (!this.isSimulation) {
+            var user = Meteor.users.findOne(Meteor.userId(), {fields:{emails:1, admin:1}});
+            if (user) {
+                landingConnection.call('admin_moveTopicToTag', process.env.DOMINUS_KEY, user.emails[0].address, topicId, tagId);
             }
         }
     }

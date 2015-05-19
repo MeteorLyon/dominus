@@ -17,14 +17,12 @@ danimal:hx
 iron:router
 underscore
 reactive-var
-spiderable
 momentjs:moment
 meteor-platform
 nemo64:bootstrap
 fortawesome:fontawesome
 danimal:readymanager
 danimal:mapmover
-danimal:mapbaker
 accounts-google
 accounts-facebook
 fastclick
@@ -40,3 +38,5 @@ wylio:mandrill
 http
 meteorhacks:kadira
 meteorhacks:sikka
+danimal:svgexport
+ongoworks:spiderable

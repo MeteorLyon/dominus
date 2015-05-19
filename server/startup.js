@@ -1,4 +1,4 @@
-Future = Npm.require('fibers/future')
+Future = Npm.require('fibers/future');
 
 // BrowserPolicy.content.allowOriginForAll("http://www.google-analytics.com")
 // BrowserPolicy.content.allowOriginForAll("http://netdna.bootstrapcdn.com")

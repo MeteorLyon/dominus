@@ -1,16 +1,18 @@
 <template name="rp_info_castle">
 	<div class="rp_content" id="rp_info_castle">
+		{{> rp_closeButton}}
+
 		{{#if castleInfoLoaded}}
 			<div class="panel panel-default" style="margin-top:0;">
 				{{#if is_owner}}
 
-					<div class="panel-heading">
-						<h4>
-							<span class="light_text">Castle</span> {{name}}
-							&nbsp;
-							{{> edit_name_button}}
-						</h4>
-						{{> hex_location}} &nbsp;&nbsp; {{> center_on_button x=x y=y selected_type='castle' selected_id=_id}}
+					<div class="panel-body">
+						<div class="rpNameContainer">
+							<div class="rpNameType">Castle</div>
+							<div class="rpName">{{name}}</div>
+							<div class="rpEditName">{{> edit_name_button}}</div>
+							<div style="clear:both;"></div>
+						</div>
 					</div>
 
 					<table class="table table-condensed table-striped">
@@ -36,14 +38,17 @@
 
 				{{else}}
 
-					<div class="panel-heading">
-						<h4>
-							<div style="margin-bottom:8px;">
-								<span class="light_text">Castle</span> {{name}}
+					<div class="panel-body">
+						<div class="rpNameContainer">
+							<div class="rpNameType">Castle</div>
+							<div class="rpName">{{name}}</div>
+							<div style="clear:both;"></div>
+							<div style="margin-top:8px;">
+								<span class="light_text" style="">Lord</span> {{username}}
 							</div>
-							<span class="light_text">Lord</span> {{username}}
-						</h4>
+						</div>
 					</div>
+
 					{{#if rightPanelUserReady}}
 						<table class="table table-condensed table-striped">
 							<tbody>
@@ -74,9 +79,6 @@
 							</tbody>
 						</table>
 					{{/if}}
-					<div class="panel-body" style="text-align:center;">
-						{{> hex_location}} &nbsp;&nbsp; {{> center_on_button x=x y=y selected_type='castle' selected_id=_id}}
-					</div>
 
 				{{/if}}
 			</div>
@@ -169,6 +171,13 @@
 				{{/if}}
 
 			{{/if}}		<!-- is owner -->
+
+
+			{{#unless is_owner}}
+				<div class="panel panel-default panel-body">
+					<button class="btn btn-primary btn-block" id="reportPlayerButton">Report Player</button>
+				</div>
+			{{/unless}}
 
 		{{else}}
 			<div class="pad_group" style="text-align:center;">

@@ -5,3 +5,4 @@ git_stats/
 .build*
 run
 settings.json
+public/hexBakes/*

@@ -14,7 +14,13 @@
 		<td class="summary_hover">
 			{{name}}
 			<br>
-			<small class="light_text">{{unit_count}} Soldiers</small>
+			<small class="light_text">
+				Level {{level}}
+				&nbsp;&nbsp;
+				Soldiers: {{unit_count}}
+				&nbsp;&nbsp;
+				Worth: {{round income.worth}}
+			</small>
 		</td>
 		<td style="text-align: right;">
 			{{> center_on_button x=x y=y selected_type='village' selected_id=_id}}

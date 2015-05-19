@@ -48,6 +48,8 @@ Template.battle_report.helpers({
 Template.battle_report.events({
 	'click .battle_report_goto_hex': function() {
 		var self = this
+		check(self.x, validNumber);
+		check(self.y, validNumber);
 		Meteor.call('coords_to_id', self.x, self.y, 'hex', function(error, hexId) {
 			if (!error && hexId) {
 				center_on_hex(self.x, self.y);

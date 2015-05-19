@@ -1,0 +1,29 @@
+<template name="adminReports">
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr>
+                <td>reported</td>
+                <td>reporter</td>
+                <td>active</td>
+                <td>reason</td>
+                <td>date</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each reports}}
+                {{> adminReport}}
+            {{/each}}
+        </tbody>
+    </table>
+</template>
+
+
+<template name="adminReport">
+    <tr>
+        <td>{{username}}</td>
+        <td>{{reporterUsername}}</td>
+        <td>{{active}}</td>
+        <td>{{reason}}</td>
+        <td>{{date_calendar createdAt}}</td>
+    </tr>
+</template>

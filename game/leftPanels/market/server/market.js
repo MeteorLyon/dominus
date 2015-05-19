@@ -17,49 +17,25 @@ Meteor.methods({
 //called after buying or selling resource to update market price
 //buy is false if selling true if buying
 update_market_price = function(type, quantity, buy) {
-	check(type, String)
-	check(quantity, validNumber)
-	check(buy, Boolean)
+	check(type, String);
+	check(quantity, validNumber);
+	check(buy, Boolean);
 
-	var resource = Market.findOne({type: type}, {fields: {price:1}})
+	var resource = Market.findOne({type: type}, {fields: {price:1}});
 	if (resource) {
-		var price = resource.price
-
-		// if (buy) {
-
-		// 	// for fractions
-		// 	if (quantity - Math.floor(quantity) > 0 && quantity - Math.floor(quantity) < 1) {
-		// 		price += (price * s.market.increment) * (quantity - Math.floor(quantity))
-		// 	}
-
-		// 	for (var n=1; n<=quantity; n++) {
-		// 		price += price * s.market.increment
-		// 	}
-
-		// } else {
-
-		// 	// for fractions
-		// 	if (quantity - Math.floor(quantity) > 0 && quantity - Math.floor(quantity) < 1) {
-		// 		price -= (price * s.market.increment) * (quantity - Math.floor(quantity))
-		// 	}
-
-		// 	for (var n=1; n<=quantity; n++) {
-		// 		price -= price * s.market.increment
-		// 	}
-
-		// }
+		var price = resource.price;
 
 		if (!buy) {
-			quantity = quantity * -1
+			quantity = quantity * -1;
 		}
 
-		price = price * Math.pow(s.market.increment + 1, quantity)
+		price = price * Math.pow(s.market.increment + 1, quantity);
 
-		check(price, validNumber)
+		check(price, validNumber);
 
-		Market.update(resource._id, {$set: {price: price}})
+		Market.update(resource._id, {$set: {price: price}});
 	}
-}
+};
 
 
 

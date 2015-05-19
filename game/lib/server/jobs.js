@@ -104,6 +104,12 @@ Meteor.startup(function() {
 		}, s.village.construction_update_interval);
 
 
+		// repots
+		Meteor.setInterval(function() {
+			Cue.addTask('checkReports', {isAsync:false, unique:true}, {});
+		}, s.reportCheckInterval);
+
+
 
 		// resource collection
 		var max = 1000 * 60 * 60;
@@ -142,6 +148,12 @@ Meteor.startup(function() {
 
 		// every 10 minutes
 		Meteor.setInterval(function() {
+			// don't run before game has started
+			var setting = Settings.findOne({name:'gameStartDate'});
+			if (!setting || setting.value === null) {
+				return false;
+			}
+
 			Cue.addTask('gamestats_job', {isAsync:false, unique:true}, {});
 			Cue.addTask('updateIncomeRank', {isAsync:false, unique:true}, {});
 			Cue.addTask('updateVassalRank', {isAsync:false, unique:true}, {});
@@ -172,6 +184,12 @@ Meteor.startup(function() {
 
 
 var midnightJob = function() {
+	// don't run before game has started
+	var setting = Settings.findOne({name:'gameStartDate'});
+	if (!setting || setting.value === null) {
+		return false;
+	}
+
 	// is this still needed?
 	Meteor.users.find().forEach(function(user) {
 		Cue.addTask('dailystats_num_allies', {isAsync:false, unique:true}, {user_id:user._id});
@@ -183,6 +201,12 @@ var midnightJob = function() {
 
 
 var resource_interval_jobs = function() {
+	// don't run before game has started
+	var setting = Settings.findOne({name:'gameStartDate'});
+	if (!setting || setting.value === null) {
+		return false;
+	}
+
 	Cue.addTask('record_market_history', {isAsync:true, unique:false}, {quantity:0});
 	Cue.addTask('gatherResources', {isAsync:false, unique:true}, {});
 	Cue.addTask('spendTaxes', {isAsync:false, unique:true}, {});

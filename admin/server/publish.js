@@ -35,4 +35,8 @@ Meteor.publish('adminRoomchats', function(chatroom_id) {
 
 admin_publish('adminSettings', function() {
 	return Settings.find();
-})
+});
+
+admin_publish('adminReports', function() {
+	return Reports.find({}, {sort:{createdAt:-1}, limit:200});
+});

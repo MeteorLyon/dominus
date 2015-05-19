@@ -4,13 +4,18 @@
             Add Reply
         </div>
         <div class="panel-body">
-            <div class="alert alert-danger" id="newPostAlert" style="display:none;"></div>
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Type your message here." id="newPostTextarea" rows=10></textarea>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" type="button" id="newPostButton">Submit Reply</button>
-            </div>
+            {{#if hasReports}}
+                Can't post in forums for {{reportTimeLeft}}.
+            {{else}}
+
+                <div class="alert alert-danger" id="newPostAlert" style="display:none;"></div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Type your message here." id="newPostTextarea" rows=10></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="button" id="newPostButton">Submit Reply</button>
+                </div>
+            {{/if}}
         </div>
     </div>
 </template>

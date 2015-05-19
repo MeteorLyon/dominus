@@ -18,13 +18,23 @@ Template.forumTopic.helpers({
                 return Forumtags.findOne(topic.tagId);
             }
         }
-    }
+    },
+
+    tags: function() {
+        return Forumtags.find({});
+    },
 });
 
 
 Template.forumTopic.events({
     'click .gotoForumListButton': function(event, template) {
         Session.set('forumTemplate', 'forumList');
+    },
+
+    'click .moveTopicToTagButton': function(event, template) {
+        var topicId = event.currentTarget.getAttribute('data-id');
+        var tagId = event.currentTarget.getAttribute('data-tagId');
+        Meteor.call('admin_moveTopicToTag', topicId, tagId);
     }
 });
 

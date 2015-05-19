@@ -1,35 +1,43 @@
 <template name="forumNewTopic">
     <div id="forumNewTopic" class="darkBg">
-        <div class="alert alert-danger" role="alert" id="topicAlert" style="display:none;"></div>
+        {{#if hasReports}}
+            Can't post in forums for {{reportTimeLeft}}.
 
-        <div class="form-group">
-            <input type="text" class="form-control" id="topicTitleInput" placeholder="What is this discussion about in one brief sentence?">
-        </div>
+            <br><br>
 
-        <div class="form-group">
-            <select class="form-control" id="topicTagSelect">
-                <option value=false>Select a Category</option>
-                {{#each tags}}
-                    <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-            </select>
-        </div>
+            <button id="cancelNewTopicButton" class="btn btn-primary">Back to Forums</button>
+        {{else}}
+            <div class="alert alert-danger" role="alert" id="topicAlert" style="display:none;"></div>
 
-        <div class="form-group">
-            <textarea class="form-control" rows="15" id="topicTextarea" placeholder="Type here."></textarea>
-        </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="topicTitleInput" placeholder="What is this discussion about in one brief sentence?">
+            </div>
 
-        <div class="form-group">
-            <button id="saveNewTopicButton" class="btn btn-primary">Create Topic</button>
+            <div class="form-group">
+                <select class="form-control" id="topicTagSelect">
+                    <option value=false>Select a Category</option>
+                    {{#each tags}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
 
-            <button id="cancelNewTopicButton" class="btn btn-primary">Cancel</button>
-        </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="15" id="topicTextarea" placeholder="Type here."></textarea>
+            </div>
 
-        <br><br>
+            <div class="form-group">
+                <button id="saveNewTopicButton" class="btn btn-primary">Create Topic</button>
 
-        &bull; HTML is stripped.<br>
-        &bull; URLs are turned into links.<br>
-        &bull; Hex coordinates like 3,-4 are turned into links.<br>
+                <button id="cancelNewTopicButton" class="btn btn-primary">Cancel</button>
+            </div>
+
+            <br><br>
+
+            &bull; HTML is stripped.<br>
+            &bull; URLs are turned into links.<br>
+            &bull; Hex coordinates like 3,-4 are turned into links.<br>
+        {{/if}}
 
         <br>
     </div>

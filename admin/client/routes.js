@@ -3,6 +3,11 @@ Router.route('/admin/settings', function() {
     this.render('adminSettings');
 });
 
+Router.route('/admin/reports', function() {
+    this.layout('adminLayout');
+    this.render('adminReports');
+});
+
 Router.route('/admin', function() {
     this.layout('adminLayout');
     this.render('admin');

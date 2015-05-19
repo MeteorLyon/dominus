@@ -1,17 +1,17 @@
 Template.menu.helpers({
 	smallScreen: function() {
-		var screenWidth = Session.get('screenWidth')
+		var screenWidth = Session.get('screenWidth');
 		if (screenWidth) {
-			return Session.get('screenWidth') < 800
+			return Session.get('screenWidth') < 800;
 		}
 	},
 
 	summary_active: function() {
-		if (Session.get('show_summary_panel')) { return 'active' } else { return '' }
+		if (Session.get('show_summary_panel')) { return 'active'; } else { return ''; }
 	},
 
 	numUnreadAlerts: function() {
-		return UnreadAlerts.find().count()
+		return UnreadAlerts.find().count();
 	},
 
 	alerts_active: function() {
@@ -85,11 +85,11 @@ Template.menu.helpers({
 	},
 
 	is_new_chat: function() {
-		var isNew = false
-		var page_title = s.game_name
+		var isNew = false;
+		var page_title = s.game_name + " : " + _.capitalize(Meteor.settings.public.GAME_ID);
 
 		Roomlist.find().forEach(function(room) {
-			var selectedId = Session.get('selectedChatroomId')
+			var selectedId = Session.get('selectedChatroomId');
 			if (room._id != selectedId || !Session.get('windowHasFocus')) {
 				var recent = Recentchats.findOne({room_id:room._id})
 				if (recent) {

@@ -69,20 +69,20 @@ Meteor.publish('left_panel_armies', function() {
 
 Meteor.publish('left_panel_villages', function() {
 	if(this.userId) {
-		var sub = this
-		var fields = {name:1, x:1, y:1, user_id:1}
+		var sub = this;
+		var fields = {name:1, x:1, y:1, user_id:1, level:1, "income.worth":1};
 
 		_.each(s.army.types, function(type) {
-			fields[type] = 1
-		})
+			fields[type] = 1;
+		});
 
-		var cur = Villages.find({user_id: this.userId}, {fields: fields})
-		Mongo.Collection._publishCursor(cur, sub, 'left_panel_villages')
-		return sub.ready()
+		var cur = Villages.find({user_id: this.userId}, {fields: fields});
+		Mongo.Collection._publishCursor(cur, sub, 'left_panel_villages');
+		return sub.ready();
 	} else {
-		this.ready()
+		this.ready();
 	}
-})
+});
 
 
 Meteor.publish('user_buildings_for_minimap', function(user_id) {

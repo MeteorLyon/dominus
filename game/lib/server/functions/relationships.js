@@ -61,7 +61,7 @@ set_lord_and_vassal = function(winner_id, loser_id) {
 	// he is either above winner or he is in a different branch
 	if (_.indexOf(winner.allies_above, loser._id) != -1) {
 
-		// winner is conquering his lord, moving up the tree
+		// winner is conquering their lord, moving up the tree
 		remove_lord_and_vassal(winner.lord, winner._id);
 
 		// loser's lord is now winner's lord
@@ -71,7 +71,7 @@ set_lord_and_vassal = function(winner_id, loser_id) {
 		}
 
 	// winner is stealing loser from another lord
-	// remove connection between loser and his lord
+	// remove connection between loser and their lord
 	// create notification for old lord that he lost a vassal
 	} else if (loser.lord) {
 		remove_lord_and_vassal(loser.lord, loser._id);
@@ -81,7 +81,7 @@ set_lord_and_vassal = function(winner_id, loser_id) {
 	create_lord_and_vassal(winner._id, loser._id);
 
 	// is winner a new king
-	// has he conquered his lord?
+	// has he conquered their lord?
 	if (winner.king == loser._id) {
 		Meteor.users.update(winner._id, {$set: {is_king:true}});
 	}

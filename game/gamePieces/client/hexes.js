@@ -23,9 +23,9 @@ mapmover.maxScale = s.hex_scale_max
 
 
 Template.hexes.helpers({
-	s3path: function() {
-		return Meteor.settings.public.s3path
-	},
+	// s3path: function() {
+	// 	return Meteor.settings.public.s3path
+	// },
 
 	// this is only used for the hex coordinates
 	// not used to draw the hexes
@@ -75,6 +75,8 @@ Template.hexes.events({
 
 			if (mouseMode == 'default') {
 
+				check(coord.x, validNumber);
+				check(coord.y, validNumber);
 				Meteor.call('coords_to_id', coord.x, coord.y, 'hex', function(error, hexId) {
 					Session.set('selected_type', 'hex')
 					Session.set('selected_id', hexId)

@@ -84,22 +84,22 @@ Template.rp_info_castle.helpers({
 	is_owner: function() {
 		if (Template.instance().userData && Template.currentData()) {
 			if (Template.currentData().user_id == Template.instance().userData.get()._id) {
-				return true
+				return true;
 			}
 		}
-		return false
+		return false;
 	},
 
 	no_soldiers: function() {
 		if (this) {
-			var self = this
-			var count = 0
+			var self = this;
+			var count = 0;
 
 			_.each(s.army.types, function(type) {
-				count += self[type]
-			})
+				count += self[type];
+			});
 
-			return (count == 0)
+			return count === 0;
 		}
 	},
 
@@ -137,36 +137,40 @@ Template.rp_info_castle.helpers({
 
 Template.rp_info_castle.events({
 	'click #send_army_from_castle_button': function(event, template) {
-		Session.set('addToExistingArmyMoves', false)
-		Session.set('rp_template', 'rp_move_unit')
+		Session.set('addToExistingArmyMoves', false);
+		Session.set('rp_template', 'rp_move_unit');
 	},
 
 	'click #hire_army_from_castle_button': function(event, template) {
-		Session.set('rp_template', 'rp_hire_army')
+		Session.set('rp_template', 'rp_hire_army');
 
 	},
 
 	'click #send_gold_button': function(event, template) {
-		Session.set('rp_template', 'rp_send_gold')
+		Session.set('rp_template', 'rp_send_gold');
 	},
 
 	'change .image_radios': function(event, template) {
-		var castle_id = UI._templateInstance().data._id
-		Meteor.call('set_unit_image', castle_id, 'castles', this.toString())
+		var castle_id = UI._templateInstance().data._id;
+		Meteor.call('set_unit_image', castle_id, 'castles', this.toString());
 	},
 
 	'click #createChatButton': function(event, template) {
-		Meteor.call('startChatroomWith', template.data.username)
+		Meteor.call('startChatroomWith', template.data.username);
+	},
+
+	'click #reportPlayerButton': function(event, template) {
+		Session.set('rp_template', 'rp_reportPlayer');
 	}
-})
+});
 
 
 Template.rp_info_castle.created = function() {
-	var self = this
-	self.subs = new ReadyManager()
+	var self = this;
+	self.subs = new ReadyManager();
 
-	Session.set('mouse_mode', 'default')
-	Session.set('update_highlight', Random.fraction())
+	Session.set('mouse_mode', 'default');
+	Session.set('update_highlight', Random.fraction());
 
 	self.autorun(function() {
 		if (Template.currentData()) {
@@ -185,58 +189,58 @@ Template.rp_info_castle.created = function() {
 			}, {
 				groupName: 'rightPanelTree',
 				subscriptions: [ Meteor.subscribe('rightPanelTree', Template.currentData().user_id).ready() ]
-			}])
+			}]);
 		}
-	})
+	});
 
 
-	self.userData = new ReactiveVar(null)
+	self.userData = new ReactiveVar(null);
 	this.autorun(function() {
-		var fields = {vassals: 1, allies_below: 1, lord: 1}
-		var user = Meteor.users.findOne(Meteor.userId(), {fields: fields})
+		var fields = {vassals: 1, allies_below: 1, lord: 1};
+		var user = Meteor.users.findOne(Meteor.userId(), {fields: fields});
 		if (user) {
-			self.userData.set(user)
+			self.userData.set(user);
 		}
-	})
+	});
 
 
-	self.power = new ReactiveVar(null)
+	self.power = new ReactiveVar(null);
 	self.autorun(function() {
 		if (Template.currentData()) {
 			Tracker.nonreactive(function() {
-				var basePower = getUnitBasePower(Template.currentData())
-				var locationMultiplier = getUnitLocationBonusMultiplier(Template.currentData(), Session.get('selected_type'))
+				var basePower = getUnitBasePower(Template.currentData());
+				var locationMultiplier = getUnitLocationBonusMultiplier(Template.currentData(), Session.get('selected_type'));
 
 				var power = {
 					offense: basePower.offense.total * locationMultiplier,
 					defense: basePower.defense.total * locationMultiplier
-				}
+				};
 
-				self.power.set(power)
-			})
+				self.power.set(power);
+			});
 		}
-	})
+	});
 
 
-	self.relationship = new ReactiveVar(null)
+	self.relationship = new ReactiveVar(null);
 	self.autorun(function() {
 		if (Template.currentData() && Template.currentData().user_id) {
 			Tracker.nonreactive(function() {
-				self.relationship.set(getUnitRelationType(Template.currentData().user_id))
-			})
+				self.relationship.set(getUnitRelationType(Template.currentData().user_id));
+			});
 		}
-	})
+	});
 
 
-	self.daysSinceUserActive = new ReactiveVar(null)
+	self.daysSinceUserActive = new ReactiveVar(null);
 	self.autorun(function() {
 		if (Template.currentData() && Template.currentData().user_id) {
 			var profile = Profiles.findOne();
 			if (profile && profile.pro) {
 				Meteor.call('daysSinceUserActive', Template.currentData().user_id, function(error, result) {
-					self.daysSinceUserActive.set(result)
-				})
+					self.daysSinceUserActive.set(result);
+				});
 			}
 		}
-	})
-}
+	});
+};

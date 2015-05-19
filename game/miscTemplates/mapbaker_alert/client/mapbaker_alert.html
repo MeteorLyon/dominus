@@ -1,15 +1,24 @@
 <template name="mapbaker_alert">
-    <div id="mapbakerPositioner" class="popupPanelContainer">
-        {{#if show}}
+    {{#if show}}
+        <div id="mapbakerPositioner" class="popupPanelContainer">
             <div id="mapbaker_alert">
                 <h4>Baking Map</h4>
                 The map is baking.  This might take a bit.<br>
-                {{finished}}/{{started}} pieces done.<br>
+                {{finished}} of {{started}} pieces done.<br>
+                <br>
+
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{finished}}" aria-valuemin="0" aria-valuemax="{{started}}" style="width: {{percentDone}}%;">
+                        <span class="sr-only">{{percentDone}}% Complete</span>
+
+                    </div>
+                </div>
+
                 <br>
                 <span class="light_text">
                     This happens when the map expands.  If there is not enough room on the map when a new player joins then the map grows.
                 </span>
             </div>
-        {{/if}}
-    </div>
+        </div>
+    {{/if}}
 </template>

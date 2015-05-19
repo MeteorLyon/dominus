@@ -94,7 +94,7 @@ if (Meteor.settings.public.GAME_ID == 'speed') {
             offense: 1,
             defense: 1,
             speed: 12,
-            bonus_against_buildings: 40
+            bonus_against_buildings: 50
         }
     };
     s.village.cost = {
@@ -129,7 +129,7 @@ if (Meteor.settings.public.GAME_ID == 'speed') {
 }
 
 if (Meteor.settings.public.GAME_ID == 'dev') {
-    s.serverMaxPlayers = 200;
+    s.serverMaxPlayers = 300;
 
     // length of time added to game end clock when there is a new dominus
     s.time_til_game_end_when_new_dominus = 1000 * 60 * 60 * 24 * 2; 	// 2 days

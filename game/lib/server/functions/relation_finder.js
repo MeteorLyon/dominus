@@ -1,4 +1,4 @@
-// update relationships for user and everyone in his king's branch
+// update relationships for user and everyone in their king's branch
 // allies - everyone above and below you in tree not including self - NON LONGER USED
 // allies_below - everyone below not including self
 // allies_above - everyone above not including self

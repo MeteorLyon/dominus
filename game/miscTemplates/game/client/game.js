@@ -126,6 +126,8 @@ Template.game.created = function() {
 
 Template.game.rendered = function() {
 
+	document.title = "Dominus : "+_.capitalize(Meteor.settings.public.GAME_ID);
+
 	this.autorun(function() {
 		var canvasSize = Session.get('canvas_size')
 		if (canvasSize) {
@@ -170,4 +172,5 @@ Template.game.rendered = function() {
 
 Meteor.startup(function () {
 	Meteor.subscribe('user_data');
+	Meteor.subscribe('myReports');
 })

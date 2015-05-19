@@ -44,6 +44,8 @@ Template.gameOverAlert.events({
             var winner = setting.value;
 
             if (winner) {
+                check(winner.x, validNumber);
+                check(winner.y, validNumber);
                 Meteor.call('coords_to_id', winner.x, winner.y, 'hex', function(error, hexId) {
                     if (!error && hexId) {
                         center_on_hex(winner.x, winner.y);

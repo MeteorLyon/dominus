@@ -19,8 +19,7 @@ Meteor.methods({
 
 	admin_bakeMap: function() {
 		if (get_user_property("admin")) {
-			var mapbaker = new Mapbaker()
-			mapbaker.bakeHexes()
+			Cue.addTask('bakeHexes', {isAsync:false, unique:true}, {});
 		}
 	},
 

@@ -1,12 +1,12 @@
 Dailystats = new Mongo.Collection('dailystats');
 Gamestats = new Mongo.Collection('gamestats');
-//Jobstats = new Meteor.Collection('jobstats')
+Reports = new Mongo.Collection('reports');
 
 if (Meteor.isServer) {
 	Dailystats.allow({insert: false, update: false, remove: false});
 	Meteor.users.allow({insert: false, update: false, remove: false});
 	Gamestats.allow({insert: false, update: false, remove: false});
-	//Jobstats.allow({insert: false, update: false, remove: false})
+	Reports.allow({insert: false, update: false, remove: false});
 }
 
 Meteor.startup(function() {

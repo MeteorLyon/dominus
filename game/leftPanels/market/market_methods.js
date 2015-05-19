@@ -1,35 +1,31 @@
 Meteor.methods({
 	buy_resource: function(type, quantity) {
-		var start_time = new Date()
-		check(type, String)
-		check(quantity, validNumber)
-
-		if (!isFinite(quantity)) {
-			throw new Meteor.Error(404, "buy_resource quantity !isFinite");
-		}
+		var start_time = new Date();
+		check(type, String);
+		check(quantity, validNumber);
 
 		if (quantity <= 0) {
-			return {result: false, reason: 'Enter quantity above 0'}
+			return {result: false, reason: 'Enter quantity above 0'};
 		}
 
-		var resource = Market.findOne({type: type}, {fields: {_id:1}})
+		var resource = Market.findOne({type: type}, {fields: {_id:1}});
 		if (resource) {
-			var fields = {}
-			fields['gold'] = 1
-			fields[type] = 1
-			var user = Meteor.users.findOne(Meteor.userId(), {fields: fields})
+			var fields = {};
+			fields.gold = 1;
+			fields[type] = 1;
+			var user = Meteor.users.findOne(Meteor.userId(), {fields: fields});
 
-			var cost = total_of_buy(type, quantity)
+			var cost = total_of_buy(type, quantity);
 			if (isNaN(cost) || !isFinite(cost)) {
-				return {result: false, reason: 'Error'}
+				return {result: false, reason: 'Error'};
 			}
 
 			if (user.gold >= cost) {
 
-				var fields = {}
-				fields['gold'] = cost * -1
-				fields[type] = quantity
-				Meteor.users.update(user._id, {$inc: fields})
+				var fields = {};
+				fields.gold = cost * -1;
+				fields[type] = quantity;
+				Meteor.users.update(user._id, {$inc: fields});
 
 				if (!this.isSimulation) {
 					update_market_price(type, quantity, true)

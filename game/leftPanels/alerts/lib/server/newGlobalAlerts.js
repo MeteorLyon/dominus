@@ -58,28 +58,36 @@ gAlert_gameOver = function(winnerUser_id) {
 
 
 gAlert_accountDeleted = function(username) {
-    check(username, String)
-    var vars = {username:username}
-    newGlobalAlert('ga_accountDeleted', vars)
-}
+    check(username, String);
+    var vars = {username:username};
+    newGlobalAlert('ga_accountDeleted', vars);
+};
 
 
 gAlert_inactiveAccountDeleted = function(username) {
-    check(username, String)
-    var vars = {username:username}
-    newGlobalAlert('ga_inactiveAccountDeleted', vars)
-}
+    check(username, String);
+    var vars = {username:username};
+    newGlobalAlert('ga_inactiveAccountDeleted', vars);
+};
+
+gAlert_playerReported = function(user_id, username, reason) {
+    check(username, String);
+    check(user_id, String);
+    check(reason, String);
+    var vars = {username:username, user_id:user_id, reason:reason};
+    newGlobalAlert('ga_playerReported', vars);
+};
 
 
 // --------
 
 
 var newGlobalAlert = function(alertType, vars) {
-    check(alertType, String)
+    check(alertType, String);
 
     GlobalAlerts.insert({
         created_at: new Date(),
         type: alertType,
         vars: vars
-    })
-}
+    });
+};
